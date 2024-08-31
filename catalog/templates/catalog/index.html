@@ -5,14 +5,16 @@
     {% include 'catalog/includes/navbar_include.html' %}
     <div class="container my-2">
         {% include 'catalog/includes/header_main.html' %}
-        <div class="row my-2">
+        <div class="row m-4">
             {% for product in products %}
             <div class="p-2 rounded col-4">
-                <div class="card">
+                <div class="card m-4">
                     <img src="{{ product.image.url }}" class="card-img-top" alt="no_image">
                     <div class="card-body">
                         <h5>{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description }}</p>
+                        <h1>{{ product.price }} руб.</h1>
+                        <p class="card-text">{{ product.description|slice:99 }}...</p>
+                        <a href="{% url 'product' product.id %}" type="button" class="btn btn-primary">Открыть</a>
                     </div>
                 </div>
             </div>
