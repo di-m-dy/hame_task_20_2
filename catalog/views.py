@@ -56,38 +56,56 @@ def product(request, product_id):
 
 
 def add_product(request):
+    warning_text = None
     if request.method == "POST":
         category = request.POST.get("category")
         product_name = request.POST.get("product_name")
         product_description = request.POST.get("product_description")
-        product_image = request.POST.get("product_image")
-        product_price = request.POST.get("product_image")
-        warning_text = ''
+        product_image = request.FILES.get("product_image")
+        product_price = request.POST.get("product_price")
+        print(product_name)
+        print(product_description)
+        print(category)
+        print(product_image)
+        print(product_price)
         if all(
             [
                 product_name,
                 product_description,
                 product_image,
-                product_price
+                product_price,
+                category
             ]
         ):
-            if not product_price.is_digit():
-                warning_text = "В поле цена необходимо ввести числовое значение"
-                return render(request, 'catalog/add_product.html', context={"warning": warning_text})
+            if not product_price.isdigit():
+                warning_text = "В поле «цена» необходимо ввести числовое значение"
+                context = {
+                    "warning_text": warning_text,
+                    "categories": Category.objects.all()
+                }
+                return render(request, 'catalog/add_product.html', context=context)
 
             product_data = Product(
                 name=product_name,
-                category=category,
+                category=Category.objects.get(pk=category),
                 description=product_description,
                 image=product_image,
                 price=product_price
             )
-            product_data.save
+            product_data.save()
             return render(
                 request,
                 'catalog/success_adding_product.html',
                 context={"product": product_data}
             )
-    else:
-        warning_text = 'Неверный ввод'
-    return render(request, 'catalog/add_product.html', context={"warning": warning_text})
+        else:
+            warning_text = 'Неверный ввод'
+    context = {
+        "warning_text": warning_text,
+        "categories": Category.objects.all()
+    }
+    return render(request, 'catalog/add_product.html', context=context)
+
+
+def success_adding_product(request):
+    return render(request, 'catalog/success_adding_product.html')
