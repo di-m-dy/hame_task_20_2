@@ -1,4 +1,5 @@
 {% extends "catalog/base.html" %}
+{% load my_tags %}
 {% block title %}{{ product.name }}{% endblock %}
 {% block content %}
 <main>
@@ -9,7 +10,7 @@
         <div class="card mb-3" style="max-width: 100em;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="{{ product.image.url }}" class="img-fluid rounded-start"
+                    <img src="{% mymedia product.image %}" class="img-fluid rounded-start"
                          alt="image for {{ product.name }}">
                 </div>
                 <div class="col-md-8">
