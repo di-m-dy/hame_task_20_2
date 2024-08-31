@@ -4,13 +4,7 @@
 <main>
     {% include 'catalog/includes/navbar_include.html' %}
     <div class="container my-2">
-        <div class="bg-body-tertiary p-4 rounded">
-            <div class="col-sm-8 py-4 mx-auto">
-                <h1 class="display-5 fw-medium">Local Farmers Store</h1>
-                <p class="fs-5">Онлайн магазин фермерских продуктов</p>
-                <p>В нашем магазине вы можете приобрести качественную продукцию лучших фермеров страны</p>
-            </div>
-        </div>
+        {% include 'catalog/includes/header_main.html' %}
         <div class="row my-2">
             {% for product in products %}
             <div class="p-2 rounded col-4">

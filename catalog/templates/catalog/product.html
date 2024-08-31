@@ -1,0 +1,32 @@
+{% extends "catalog/base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<main>
+    {% include 'catalog/includes/navbar_include.html' %}
+    <div class="container my-2">
+        {% include 'catalog/includes/header_main.html' %}
+        <div class="my-2">
+        <div class="card mb-3" style="max-width: 100em;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ product.image.url }}" class="img-fluid rounded-start"
+                         alt="image for {{ product.name }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <span class="badge text-bg-secondary">{{ product.category.name }}</span>
+                        <h3 class="card-title my-2">{{ product.name }}</h3>
+                        <h1 class="card-title my-4">{{ product.price }} руб.</h1>
+                        <div><strong>Описание:</strong> {{ product.description }}</div>
+                        <p class="card-text">
+                            <small class="text-body-secondary">добавлен: {{ product.created_at }}</small>
+                        </p>
+                        <button type="button" class="btn btn-outline-primary" disabled>Купить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+{% endblock %}
